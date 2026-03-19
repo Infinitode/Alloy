@@ -4,8 +4,14 @@
 
 **Alloy** is an industrial-standard, dark-mode-exclusive UI component library engineered for structural precision and scale. It drops the fluff of generic design frameworks in favor of a brutally efficient, mathematically scaled architectural aesthetic.
 
+## Recent Changes:
+
+- Added mobile responsive design to all components and to the landing page.
+- Updated live demo website link.
+
 ## Features
 
+- **Responsive Design:** Components are designed to work on all devices, from mobile to desktop.
 - **Industrial Grade Architecture:** Components designed with absolute predictability. Everything snaps to a strict atomic grid.
 - **Dark Mode Exclusive:** Fully committed to dark interfaces. `bg-zinc-950` and `white` contrasts are core to the system.
 - **Zero Latency Scaling:** Fully built on TailwindCSS with no bulky runtime logic.
