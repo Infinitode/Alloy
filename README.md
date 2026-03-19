@@ -1,6 +1,6 @@
 # Alloy UI Foundation
 
-`V1.0.0 PRODUCTION` | Live UI demo and explorer on [https://infinitode.netlify.app/experiments/alloy](https://infinitode.netlify.app/experiments/alloy)
+`V1.0.0 PRODUCTION` | Live UI demo and component explorer on [https://alloyui.netlify.app](https://alloyui.netlify.app) | Our website: [https://infinitode.netlify.app](https://infinitode.netlify.app)
 
 **Alloy** is an industrial-standard, dark-mode-exclusive UI component library engineered for structural precision and scale. It drops the fluff of generic design frameworks in favor of a brutally efficient, mathematically scaled architectural aesthetic.
 
