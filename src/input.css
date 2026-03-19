@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme{
+    --color-primary: #ff9531;
+    --font-sans: 'Libre Franklin', sans-serif;
+    --font-outfit: 'Outfit', sans-serif;
+    
+    /* Pixel/Blocky structured layout colors - Dark Only */
+    --color-border: #27272a;
+    --color-bg: #09090b; /* zinc-950 */
+    --color-bg-alt: #18181b; /* zinc-900 */
+}
+
+
+@layer components {
+    /* Custom Checkbox with Tailwind */
+    input[type="checkbox"]:hover {
+        @apply border-primary;
+        background-color: #ff9531;
+    }
+
+    input[type="checkbox"]:checked {
+        @apply bg-primary border-primary;
+    }
+
+    input[type="checkbox"]:checked::after {
+        content: '✓';
+        @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-sm font-bold;
+    }
+
+    /* Custom Range Slider with Glowing Progress */
+    input[type="range"] {
+        @apply appearance-none w-full h-2 rounded-full bg-white outline-none cursor-pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        @apply appearance-none w-5 h-5 rounded-full bg-primary cursor-pointer transition-all;
+        box-shadow: 0 0 12px rgba(255, 79, 25, 0.6), 0 0 24px rgba(255, 79, 25, 0.3);
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+        @apply scale-110;
+        box-shadow: 0 0 16px rgba(255, 79, 25, 0.8), 0 0 32px rgba(255, 79, 25, 0.5);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        @apply w-5 h-5 rounded-full bg-primary cursor-pointer border-none transition-all;
+        box-shadow: 0 0 12px rgba(255, 79, 25, 0.6), 0 0 24px rgba(255, 79, 25, 0.3);
+    }
+
+    input[type="range"]::-moz-range-thumb:hover {
+        @apply scale-110;
+        box-shadow: 0 0 16px rgba(255, 79, 25, 0.8), 0 0 32px rgba(255, 79, 25, 0.5);
+    }
+
+    input[type="range"]::-moz-range-track {
+        @apply bg-transparent border-none;
+    }
+
+    input[type="range"]::-moz-range-progress {
+        @apply bg-primary rounded-full;
+        box-shadow: 0 0 12px rgba(255, 79, 25, 0.6);
+    }
+}
+

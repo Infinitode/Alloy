@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alloy | Premium UI Foundation</title>
+    <link href="./src/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --color-primary: #FF9531;
+            --color-bg: #09090b;
+            --color-bg-alt: #18181b;
+            --color-border: #27272a;
+            --color-text: #ffffff;
+            --color-text-dim: #71717a;
+        }
+
+        .grid-lines {
+            background-image:
+                linear-gradient(to right, rgba(39, 39, 42, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(39, 39, 42, 0.15) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+
+        .pixel-border {
+            box-shadow: 0 0 0 1px var(--color-bg), 0 0 0 2px var(--color-border);
+        }
+
+        .hero-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 149, 49, 0.08) 0%, transparent 60%);
+        }
+        
+    </style>
+</head>
+
+<body class="bg-bg text-white font-sans overflow-x-hidden">
+    <!-- Overlay Glow -->
+    <div class="fixed inset-0 hero-glow pointer-events-none"></div>
+
+    <!-- Structured Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 border-b border-border bg-bg/95 backdrop-blur-md">
+        <div class="max-w-[1440px] mx-auto px-10 h-24 flex items-center justify-between border-x border-border">
+            <div class="flex items-center gap-6">
+                <div class="w-12 h-12 bg-primary flex items-center justify-center font-black text-2xl text-zinc-950">A</div>
+                <span class="text-2xl font-outfit font-black tracking-tighter">ALLOY</span>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#logic-system" class="text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Logic System</a>
+                <a href="#atomic-core" class="text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Atomic Core</a>
+                <a href="#pixel-engine" class="text-[10px] font-black uppercase tracking-widest text-zinc-500 hover:text-white transition-colors">Pixel Engine</a>
+                <a href="components/index.html" class="px-8 py-3 bg-primary text-zinc-950 font-black text-[10px] uppercase tracking-widest hover:bg-white transition-all">EXPLORER</a>
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <a href="https://github.com/Infinitode/Alloy" class="text-xl text-zinc-500 hover:text-white" target="_blank"><i class="bi bi-github"></i></a>
+                <div class="md:hidden text-2xl"><i class="bi bi-list"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative pt-24 min-h-screen grid-lines">
+        <!-- Hero Section -->
+        <section class="max-w-[1440px] mx-auto border-x border-border min-h-[calc(100vh-96px)] flex flex-col items-center justify-center px-10 relative overflow-hidden">
+            <div class="absolute top-40 left-10 w-32 h-px bg-border"></div>
+            <div class="absolute bottom-40 right-10 w-32 h-px bg-border"></div>
+
+            <div class="text-center relative z-10">
+                <div class="inline-flex items-center gap-3 px-4 py-2 border border-border bg-zinc-900/40 mb-12">
+                    <span class="w-2 h-2 bg-primary animate-pulse"></span>
+                    <span class="text-[10px] font-black tracking-[0.3em] uppercase opacity-70">Industrial Standard v1.0.0</span>
+                </div>
+
+                <h1 class="text-[clamp(3rem,10vw,10rem)] font-black font-outfit tracking-[calc(-0.06em)] leading-[0.85] mb-12">
+                    RAW <br> <span class="text-primary italic">STRUCTURAL</span> <br> POWER.
+                </h1>
+
+                <p class="text-zinc-500 max-w-2xl mx-auto text-xl font-medium mb-16 leading-relaxed">
+                    Alloy is a premium UI foundation designed for the next generation of industrial-grade interfaces. Zero fluff. Pure architecture.
+                </p>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <a href="components/index.html" class="w-full md:w-auto px-12 py-6 bg-primary text-zinc-950 font-black text-lg uppercase tracking-widest border-2 border-primary hover:bg-transparent hover:text-primary transition-all">
+                        COLLECTION EXPLORER
+                    </a>
+                    <a href="https://github.com/Infinitode/Alloy" target="_blank" class="w-full md:w-auto px-12 py-6 border-2 border-border font-black text-lg uppercase tracking-widest hover:border-primary hover:text-primary hover:bg-zinc-900/50 transition-all">
+                        SOURCE CODE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Visual Static Elements -->
+            <div class="mt-32 w-full grid grid-cols-2 md:grid-cols-4 border border-border overflow-hidden">
+                <div class="h-40 border-r border-border p-8 flex flex-col justify-end hover:bg-zinc-900/40 transition-colors cursor-pointer group">
+                    <div class="text-[10px] font-black text-zinc-700 uppercase mb-4 group-hover:text-primary transition-colors">Node_01</div>
+                    <div class="h-1 bg-zinc-800 w-full group-hover:bg-primary/50 transition-colors"></div>
+                </div>
+                <div class="h-40 border-r border-border p-8 flex flex-col justify-end bg-zinc-900/20 hover:bg-zinc-900/60 transition-colors cursor-pointer group">
+                    <div class="text-[10px] font-black text-primary uppercase mb-4 group-hover:text-white transition-colors">Core_Active</div>
+                    <div class="h-1 bg-primary w-full group-hover:bg-white transition-colors"></div>
+                </div>
+                <div class="h-40 border-r border-border p-8 flex flex-col justify-end hover:bg-zinc-900/40 transition-colors cursor-pointer group">
+                    <div class="text-[10px] font-black text-zinc-700 uppercase mb-4 group-hover:text-primary transition-colors">Status_OK</div>
+                    <div class="h-1 bg-zinc-800 w-full group-hover:bg-primary/50 transition-colors"></div>
+                </div>
+                <div class="h-40 p-8 flex flex-col justify-end hover:bg-zinc-900/40 transition-colors cursor-pointer group">
+                    <div class="text-[10px] font-black text-zinc-700 uppercase mb-4 group-hover:text-primary transition-colors">Log_Dump</div>
+                    <div class="h-1 bg-zinc-800 w-full group-hover:bg-primary/50 transition-colors"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logic System Section -->
+        <section id="logic-system" class="max-w-[1440px] mx-auto border-x border-b border-border bg-bg/50">
+            <div class="grid md:grid-cols-2 min-h-[600px]">
+                <div class="p-12 lg:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-border">
+                    <h2 class="text-6xl font-black font-outfit uppercase tracking-tighter mb-12 italic">Logic <br>System.</h2>
+                    <p class="text-zinc-500 text-xl leading-relaxed mb-16 max-w-md">
+                        Every component in Alloy is built with a block-first mentality. We don't hide the structure; we celebrate it. Consistent padding, predictable scaling, and solid intersections.
+                    </p>
+                    <div class="flex items-center gap-8 group cursor-pointer max-w-sm">
+                        <div class="w-16 h-16 border border-primary flex items-center justify-center font-black text-primary transition-all group-hover:bg-primary group-hover:text-zinc-950">01</div>
+                        <div>
+                            <h4 class="font-black text-lg uppercase text-white group-hover:text-primary transition-colors">Global State Logic</h4>
+                            <p class="text-zinc-600 text-sm italic">Base elements designed for absolute modularity.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative bg-zinc-950 flex items-center justify-center p-12 overflow-hidden">
+                    <div class="absolute inset-x-0 top-1/2 h-px bg-zinc-900"></div>
+                    <div class="absolute inset-y-0 left-1/2 w-px bg-zinc-900"></div>
+                    
+                    <div class="w-full max-w-[400px] aspect-square border-2 border-border bg-bg p-12 relative z-10 pixel-border hover:-translate-y-2 hover:border-primary transition-all cursor-pointer">
+                        <div class="absolute -top-1 -left-1 w-2 h-2 bg-primary"></div>
+                        <div class="absolute -top-1 -right-1 w-2 h-2 bg-primary"></div>
+                        <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-primary"></div>
+                        <div class="absolute -bottom-1 -right-1 w-2 h-2 bg-primary"></div>
+
+                        <div class="h-full border border-dashed border-zinc-800 p-10 flex flex-col justify-center group">
+                            <span class="text-xs font-mono text-primary mb-6">// Logic Core</span>
+                            <div class="space-y-4">
+                                <div class="h-px bg-zinc-900 w-full group-hover:bg-primary/50 transition-colors"></div>
+                                <div class="h-px bg-zinc-800 w-[85%] group-hover:bg-primary/30 transition-colors"></div>
+                                <div class="h-px bg-zinc-900 w-[95%] group-hover:bg-primary/40 transition-colors"></div>
+                                <div class="mt-12 h-16 bg-primary/5 border border-primary/20 flex items-center justify-center">
+                                     <i class="bi bi-cpu text-primary opacity-50 text-2xl group-hover:opacity-100 transition-opacity"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Atomic Core Section -->
+        <section id="atomic-core" class="max-w-[1440px] mx-auto border-x border-b border-border bg-zinc-950">
+            <div class="grid md:grid-cols-2 min-h-[600px]">
+                <div class="relative bg-bg/50 flex flex-col p-12 overflow-hidden justify-center items-center border-b md:border-b-0 md:border-r border-border order-last md:order-first">
+                    <div class="absolute inset-0 grid-lines opacity-10"></div>
+                    <div class="relative z-10 w-full max-w-sm">
+                        <div class="w-full bg-bg border-2 border-border p-6 mb-6 pixel-border group hover:border-white transition-all cursor-pointer">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-[10px] font-black uppercase text-zinc-500 group-hover:text-white transition-colors">Component Status</span>
+                                <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                            </div>
+                            <div class="h-2 w-full bg-zinc-900"><div class="h-full bg-primary w-3/4"></div></div>
+                        </div>
+                        <div class="w-full bg-bg border-2 border-border p-6 ml-12 pixel-border group hover:border-white transition-all cursor-pointer">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-[10px] font-black uppercase text-zinc-500 group-hover:text-white transition-colors">Network Sync</span>
+                                <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                            </div>
+                            <div class="h-2 w-full bg-zinc-900"><div class="h-full bg-zinc-700 w-1/2 group-hover:bg-white transition-colors"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-12 lg:p-24 flex flex-col justify-center">
+                    <h2 class="text-6xl font-black font-outfit uppercase tracking-tighter mb-12 italic">Atomic <br>Core.</h2>
+                    <p class="text-zinc-500 text-xl leading-relaxed mb-16 max-w-md">
+                        Every button, input, and container functions as an immutable node. Changing properties affects rendering logically without disrupting your layout grid.
+                    </p>
+                    <div class="flex items-center gap-8 group cursor-pointer max-w-sm">
+                        <div class="w-16 h-16 border border-zinc-700 flex items-center justify-center font-black text-zinc-700 transition-all group-hover:border-white group-hover:text-white">02</div>
+                        <div>
+                            <h4 class="font-black text-lg uppercase text-zinc-300 group-hover:text-white transition-colors">Immutable Elements</h4>
+                            <p class="text-zinc-600 text-sm italic">Never break global application logic.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pixel Engine Section -->
+        <section id="pixel-engine" class="max-w-[1440px] mx-auto border-x border-b border-border bg-bg/50">
+            <div class="grid md:grid-cols-2 min-h-[600px]">
+                <div class="p-12 lg:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-border">
+                    <h2 class="text-6xl font-black font-outfit uppercase tracking-tighter mb-12 italic text-primary">Pixel<br>Engine.</h2>
+                    <p class="text-zinc-500 text-xl leading-relaxed mb-16 max-w-md">
+                        Everything snaps to a rigid set of layout variables. Absolute precision rendering means zero half-pixels and perfect baseline alignment globally.
+                    </p>
+                    <div class="flex items-center gap-8 group cursor-pointer max-w-sm">
+                        <div class="w-16 h-16 border border-zinc-700 flex items-center justify-center font-black text-zinc-700 transition-all group-hover:border-primary group-hover:text-primary">03</div>
+                        <div>
+                            <h4 class="font-black text-lg uppercase text-white group-hover:text-primary transition-colors">Strict Metric Adherence</h4>
+                            <p class="text-zinc-600 text-sm italic">All variants strictly obey identical metrics.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative bg-zinc-950 flex flex-col justify-between p-12 overflow-hidden group cursor-pointer">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--color-primary)_1px,transparent_1px)] bg-size-[40px_40px] opacity-5 group-hover:opacity-20 transition-opacity"></div>
+                    <div class="relative z-10 w-full flex-1 flex flex-col justify-center gap-8 max-w-[400px] mx-auto">
+                        <div class="flex gap-4">
+                            <div class="w-24 h-24 border border-border bg-bg flex items-center justify-center font-mono text-zinc-600 text-xs">8px</div>
+                            <div class="w-12 h-12 border border-border bg-bg mt-auto flex items-center justify-center font-mono text-zinc-600 text-xs text-[8px]">4px</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="h-1 bg-primary flex-1 group-hover:shadow-[0_0_10px_var(--color-primary)] transition-shadow"></div>
+                            <div class="font-black text-[10px] text-primary tracking-widest uppercase">Grid Alignment</div>
+                        </div>
+                        <div class="flex gap-4 border border-border p-4 bg-bg items-center">
+                            <div class="w-6 h-6 bg-zinc-800 group-hover:bg-primary transition-colors"></div>
+                            <div class="w-12 h-6 bg-zinc-800"></div>
+                            <div class="w-full h-6 bg-primary/20 border border-primary/50"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call Section -->
+        <section class="max-w-[1440px] mx-auto border-x border-border py-40 text-center px-10">
+            <h2 class="text-7xl font-black font-outfit uppercase tracking-tighter mb-16 italic opacity-20">BUILD THE IMPERISHABLE.</h2>
+            <div class="max-w-4xl mx-auto border-4 border-primary p-12 md:p-24 relative">
+                <div class="absolute -top-4 -left-4 w-8 h-8 bg-primary"></div>
+                <div class="absolute -bottom-4 -right-4 w-8 h-8 bg-primary"></div>
+                <h3 class="text-4xl md:text-6xl font-black mb-12 uppercase">READY TO INITIALIZE?</h3>
+                <a href="components/index.html" class="inline-block px-16 py-8 bg-primary text-zinc-950 font-black text-2xl uppercase tracking-widest hover:bg-white transition-all border-4 border-primary hover:border-white">START EXPLORER</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-y border-border py-20 px-10 bg-zinc-950">
+        <div class="max-w-[1440px] mx-auto grid md:grid-cols-4 gap-20">
+            <div class="col-span-2">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-8 h-8 bg-primary flex items-center justify-center font-black text-zinc-950">A</div>
+                    <span class="text-xl font-bold font-outfit tracking-tighter">ALLOY</span>
+                </div>
+                <p class="text-zinc-600 max-w-sm text-sm font-medium">Architectural UI foundations for industrial-grade web development. Powered by Tailwind V4.</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-6">Foundations</h4>
+                <a href="#logic-system" class="block text-xs font-bold text-zinc-400 hover:text-primary">Logic System</a>
+                <a href="#atomic-core" class="block text-xs font-bold text-zinc-400 hover:text-primary">Atomic Core</a>
+                <a href="#pixel-engine" class="block text-xs font-bold text-zinc-400 hover:text-primary">Pixel Engine</a>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-6">Repository</h4>
+                <a href="https://github.com/Infinitode/Alloy" target="_blank" class="block text-xs font-bold text-zinc-400 hover:text-primary">GitHub Profile</a>
+                <a href="https://github.com/Infinitode/Alloy#readme" target="_blank" class="block text-xs font-bold text-zinc-400 hover:text-primary">README Tracker</a>
+                <a href="https://github.com/Infinitode/Alloy/commits/main" target="_blank" class="block text-xs font-bold text-zinc-400 hover:text-primary">Changelog Logs</a>
+            </div>
+        </div>
+        <div class="max-w-[1440px] mx-auto mt-20 pt-10 border-t border-zinc-900 flex justify-between items-center text-[10px] font-black text-zinc-700 uppercase tracking-[0.2em]">
+            <span>&copy; 2026 INFINITODE</span>
+            <span>v1.0.0_PRODUCTION</span>
+        </div>
+    </footer>
+</body>
+
+</html>

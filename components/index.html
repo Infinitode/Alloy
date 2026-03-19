@@ -1,0 +1,1719 @@
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alloy | Explorer</title>
+  <link href="../src/index.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+  <style>
+    .grid-lines {
+        background-image: 
+            linear-gradient(to right, rgba(39, 39, 42, 0.1) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(39, 39, 42, 0.1) 1px, transparent 1px);
+        background-size: 100px 100px;
+    }
+    .hero-glow {
+        background: radial-gradient(circle at 50% 50%, rgba(255, 149, 49, 0.05) 0%, transparent 70%);
+    }
+    .pixel-border {
+        box-shadow: 
+            0 0 0 1px var(--color-bg),
+            0 0 0 2px var(--color-border);
+    }
+    .layout-full-scroll {
+      max-height: 80vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #ff9531 transparent;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+</head>
+<body class="h-screen overflow-hidden bg-bg text-white font-sans">
+  <div class="flex h-full w-full">
+    <!-- Structured Sidebar -->
+    <aside class="w-full max-w-sm shrink-0 border-r border-border bg-bg">
+      <div class="flex h-full flex-col">
+        <div class="border-b border-border p-6">
+          <div class="flex items-center justify-between mb-6">
+              <a href="../index.html" class="flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-primary transition-colors uppercase tracking-widest">
+                <i class="bi bi-arrow-left"></i> Home
+              </a>
+          </div>
+          <h1 class="text-2xl font-black font-outfit tracking-tighter flex items-center gap-3">
+            <span class="w-8 h-8 bg-primary flex items-center justify-center text-zinc-950 text-sm">A</span>
+            ALLOY
+          </h1>
+          <div class="mt-6 flex items-center gap-3 border border-border bg-zinc-900/50 px-4 py-3 focus-within:border-primary transition-all">
+            <i class="bi bi-search text-zinc-500 text-xs"></i>
+            <input id="componentSearch" type="search" placeholder="FILTER FOUNDATIONS..." class="w-full bg-transparent text-xs font-bold uppercase tracking-widest outline-none placeholder:text-zinc-600" />
+          </div>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto p-4 scrollbar-hide space-y-8">
+          <div>
+            <p class="px-2 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 mb-4">Elements</p>
+            <div class="space-y-1">
+              <button data-type="all" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>All Foundations</span>
+                <span class="text-[10px] text-zinc-600" data-count="all">0</span>
+              </button>
+              <button data-type="buttons" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Buttons</span>
+                <span class="text-[10px] text-zinc-600" data-count="buttons">0</span>
+              </button>
+              <button data-type="inputs" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Inputs</span>
+                <span class="text-[10px] text-zinc-600" data-count="inputs">0</span>
+              </button>
+              <button data-type="badges" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Badges</span>
+                <span class="text-[10px] text-zinc-600" data-count="badges">0</span>
+              </button>
+              <button data-type="feedback" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Feedback</span>
+                <span class="text-[10px] text-zinc-600" data-count="feedback">0</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <p class="px-2 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-600 mb-4">Layouts</p>
+            <div class="space-y-1">
+              <button data-type="navbars" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Headers</span>
+                <span class="text-[10px] text-zinc-600" data-count="navbars">0</span>
+              </button>
+              <button data-type="heroes" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Hero Blocks</span>
+                <span class="text-[10px] text-zinc-600" data-count="heroes">0</span>
+              </button>
+              <button data-type="cta" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>CTA Blocks</span>
+                <span class="text-[10px] text-zinc-600" data-count="cta">0</span>
+              </button>
+              <button data-type="features" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Features</span>
+                <span class="text-[10px] text-zinc-600" data-count="features">0</span>
+              </button>
+              <button data-type="pricing" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Pricing</span>
+                <span class="text-[10px] text-zinc-600" data-count="pricing">0</span>
+              </button>
+              <button data-type="tables" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Tables</span>
+                <span class="text-[10px] text-zinc-600" data-count="tables">0</span>
+              </button>
+              <button data-type="testimonials" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Testimonials</span>
+                <span class="text-[10px] text-zinc-600" data-count="testimonials">0</span>
+              </button>
+              <button data-type="auth" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Auth Forms</span>
+                <span class="text-[10px] text-zinc-600" data-count="auth">0</span>
+              </button>
+              <button data-type="contact" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Contact Forms</span>
+                <span class="text-[10px] text-zinc-600" data-count="contact">0</span>
+              </button>
+              <button data-type="footers" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Footers</span>
+                <span class="text-[10px] text-zinc-600" data-count="footers">0</span>
+              </button>
+              <button data-type="navigation" class="type-filter-btn flex w-full items-center justify-between px-4 py-3 text-left text-xs font-black uppercase tracking-widest transition-all border border-transparent hover:border-border hover:bg-bg-alt hover:text-primary">
+                <span>Navigation</span>
+                <span class="text-[10px] text-zinc-600" data-count="navigation">0</span>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto grid-lines relative">
+      <div class="fixed inset-0 hero-glow pointer-events-none"></div>
+      <div class="relative max-w-[1440px] mx-auto min-h-full border-x border-border bg-bg/40 backdrop-blur-[1px]">
+        <div class="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur px-8 py-6">
+            <h2 class="text-3xl font-black font-outfit tracking-tighter uppercase">Vault Explorer</h2>
+            <p id="resultsSummary" class="text-[10px] font-bold text-zinc-500 tracking-[0.3em] uppercase mt-1">Showing all variants</p>
+        </div>
+
+        <section id="componentList" class="p-8 space-y-40">
+          
+          <!-- NAVBARS -->
+          <article data-type="navbars" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Navigation Headers</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+              <!-- Variant 1 -->
+              <div class="variant-item" data-variant="Mega Menu Blocky">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 THE MEGA STRUCTURE</span>
+                    <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                </div>
+                <div class="preview-area border-2 border-border bg-bg p-0 overflow-hidden">
+                    <nav class="h-20 flex items-center justify-between px-8 border-b border-border">
+                        <div class="flex items-center gap-8 h-full">
+                            <div class="font-black text-xl tracking-tighter text-white">ALLOY.DOCS</div>
+                            <div class="hidden md:flex h-full items-center">
+                                <a href="#" class="h-full flex items-center px-6 border-x border-border hover:bg-zinc-900 transition-colors">Foundations</a>
+                                <a href="#" class="h-full flex items-center px-6 border-r border-border hover:bg-zinc-900 transition-colors">Components</a>
+                                <a href="#" class="h-full flex items-center px-6 border-r border-border hover:bg-zinc-900 transition-colors">Templates</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 text-white">
+                            <div class="h-10 w-10 border border-border flex items-center justify-center"><i class="bi bi-github"></i></div>
+                            <button class="px-6 py-2 bg-primary text-zinc-950 font-black text-sm">PRO ACCESS</button>
+                        </div>
+                    </nav>
+                </div>
+              </div>
+
+              <!-- Variant 2 -->
+              <div class="variant-item" data-variant="Minimal Center Nav">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 CENTERED FLOATER</span>
+                    <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                </div>
+                <div class="preview-area p-12 bg-bg-alt border-2 border-border">
+                    <nav class="max-w-fit mx-auto bg-bg border border-border p-2 flex items-center gap-1">
+                        <a href="#" class="px-4 py-2 bg-primary text-zinc-950 text-xs font-black">Home</a>
+                        <a href="#" class="px-4 py-2 hover:bg-zinc-900 text-white text-xs font-bold transition-colors">Elements</a>
+                        <a href="#" class="px-4 py-2 hover:bg-zinc-900 text-white text-xs font-bold transition-colors">Pricing</a>
+                        <div class="w-px h-4 bg-border mx-2"></div>
+                        <button class="px-4 py-2 text-xs font-black text-primary">Login</button>
+                    </nav>
+                </div>
+              </div>
+
+              <!-- Variant 3 -->
+              <div class="variant-item" data-variant="Glass Compact Nav">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 GLASS SYSTEM</span>
+                    <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                </div>
+                <div class="preview-area p-12 bg-linear-to-br from-zinc-900 to-black border-2 border-border">
+                    <nav class="flex items-center justify-between px-6 py-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-full">
+                        <div class="font-black text-white italic">A.</div>
+                        <div class="flex gap-6">
+                            <a href="#" class="text-[10px] font-black uppercase text-white/60 hover:text-white">Vault</a>
+                            <a href="#" class="text-[10px] font-black uppercase text-white/60 hover:text-white">Logic</a>
+                            <a href="#" class="text-[10px] font-black uppercase text-white/60 hover:text-white">Core</a>
+                        </div>
+                        <i class="bi bi-person text-white"></i>
+                    </nav>
+                </div>
+              </div>
+
+              <!-- Variant 4: Floating Nav Bar -->
+              <div class="variant-item" data-variant="Floating Pill Nav">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 FLOATING PILL</span>
+                    <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                </div>
+                <div class="preview-area p-12 lg:p-24 bg-zinc-950 border-2 border-border relative overflow-hidden flex items-center justify-center">
+                    <div class="absolute inset-0 grid-lines opacity-10"></div>
+                    <nav class="relative z-10 px-2 py-2 bg-bg border border-border shadow-2xl rounded-full flex items-center gap-2">
+                        <a href="#" class="px-6 py-2 rounded-full bg-primary text-zinc-950 text-[10px] font-black uppercase tracking-widest">Dashboard</a>
+                        <a href="#" class="px-6 py-2 rounded-full text-zinc-500 hover:text-white hover:bg-zinc-900 transition-all text-[10px] font-black uppercase tracking-widest">Features</a>
+                        <a href="#" class="px-6 py-2 rounded-full text-zinc-500 hover:text-white hover:bg-zinc-900 transition-all text-[10px] font-black uppercase tracking-widest">Metrics</a>
+                        <div class="w-px h-4 bg-border mx-2"></div>
+                        <a href="#" class="w-8 h-8 rounded-full border border-border flex items-center justify-center text-white hover:border-primary hover:text-primary transition-all">
+                            <i class="bi bi-grid-fill text-xs"></i>
+                        </a>
+                    </nav>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- BUTTONS -->
+          <article data-type="buttons" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Action Elements</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div class="variant-item group" data-variant="Primary Core">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-primary uppercase tracking-widest">01 CORE</span>
+                    <button class="show-code-btn text-[10px] border border-primary px-2 py-1">SOURCE</button>
+                </div>
+                <div class="preview-area bg-zinc-950 p-12 flex items-center justify-center border border-border">
+                    <button class="px-8 py-4 bg-primary text-zinc-950 font-black border-2 border-primary hover:bg-transparent hover:text-primary transition-all">CORE ACTION</button>
+                </div>
+              </div>
+              
+              <div class="variant-item group" data-variant="Ghost Structural">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 GHOST</span>
+                    <button class="show-code-btn text-[10px] border border-zinc-700 px-2 py-1">SOURCE</button>
+                </div>
+                <div class="preview-area bg-bg p-12 flex items-center justify-center border border-border">
+                    <button class="px-8 py-4 border-2 border-zinc-500 text-zinc-500 font-black hover:bg-zinc-500 hover:text-zinc-950 transition-all">STRUCTURAL</button>
+                </div>
+              </div>
+
+              <div class="variant-item group" data-variant="Floating Action">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 FLOATER</span>
+                    <button class="show-code-btn text-[10px] border border-zinc-700 px-2 py-1">SOURCE</button>
+                </div>
+                <div class="preview-area bg-bg p-12 flex items-center justify-center border border-border">
+                    <button class="w-16 h-16 bg-primary text-zinc-950 flex items-center justify-center text-2xl pixel-border hover:scale-110 transition-transform"><i class="bi bi-plus-lg"></i></button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- BADGES -->
+          <article data-type="badges" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Status Tags</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Individual Badge: Success -->
+                <div class="variant-item preview-area border border-border p-6 text-center space-y-4" data-variant="Badge Success">
+                    <span class="inline-flex items-center px-3 py-1 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 text-[10px] font-black uppercase tracking-widest">Active</span>
+                    <button class="show-code-btn block w-full text-[8px] text-zinc-600 hover:text-primary transition-colors">CODE</button>
+                </div>
+                <!-- Individual Badge: Warning -->
+                <div class="variant-item preview-area border border-border p-6 text-center space-y-4" data-variant="Badge Warning">
+                    <span class="inline-flex items-center px-3 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/20 text-[10px] font-black uppercase tracking-widest">Compromised</span>
+                    <button class="show-code-btn block w-full text-[8px] text-zinc-600 hover:text-primary transition-colors">CODE</button>
+                </div>
+                <!-- Individual Badge: Danger -->
+                <div class="variant-item preview-area border border-border p-6 text-center space-y-4" data-variant="Badge Danger">
+                    <span class="inline-flex items-center px-3 py-1 bg-rose-500/10 text-rose-500 border border-rose-500/20 text-[10px] font-black uppercase tracking-widest">Rejected</span>
+                    <button class="show-code-btn block w-full text-[8px] text-zinc-600 hover:text-primary transition-colors">CODE</button>
+                </div>
+                <!-- Individual Badge: Neutral -->
+                <div class="variant-item preview-area border border-border p-6 text-center space-y-4" data-variant="Badge Neutral">
+                    <span class="inline-flex items-center px-3 py-1 bg-zinc-500/10 text-zinc-500 border border-zinc-500/20 text-[10px] font-black uppercase tracking-widest">Draft</span>
+                    <button class="show-code-btn block w-full text-[8px] text-zinc-600 hover:text-primary transition-colors">CODE</button>
+                </div>
+            </div>
+          </article>
+
+          <!-- INPUTS -->
+          <article data-type="inputs" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Data Entry</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+               <!-- Variant 1 -->
+               <div class="variant-item" data-variant="Blocky Structural Input">
+                 <div class="flex justify-between items-center mb-4">
+                     <span class="text-[10px] font-black text-zinc-600 uppercase tracking-widest">01 BLOCKY</span>
+                     <button class="show-code-btn text-[8px] border border-zinc-800 px-2 py-1">SOURCE</button>
+                 </div>
+                 <div class="preview-area bg-bg-alt border border-border p-8">
+                    <label class="block text-[8px] font-black uppercase text-zinc-600 mb-2">Node Name</label>
+                    <input type="text" placeholder="INITIALIZE..." class="w-full bg-zinc-950 border border-border px-4 py-3 text-xs font-black uppercase tracking-widest outline-none focus:border-primary transition-all" />
+                 </div>
+               </div>
+
+               <!-- Variant 2 -->
+               <div class="variant-item" data-variant="Underline Core">
+                 <div class="flex justify-between items-center mb-4">
+                     <span class="text-[10px] font-black text-zinc-600 uppercase tracking-widest">02 MINIMAL</span>
+                     <button class="show-code-btn text-[8px] border border-zinc-800 px-2 py-1">SOURCE</button>
+                 </div>
+                 <div class="preview-area bg-bg-alt border border-border p-8">
+                    <label class="block text-[8px] font-black uppercase text-zinc-600 mb-2">Protocol ID</label>
+                    <input type="text" placeholder="AUTH_SECURE" class="w-full bg-transparent border-b-2 border-zinc-800 px-0 py-3 text-sm font-bold outline-none focus:border-primary transition-all" />
+                 </div>
+               </div>
+
+               <!-- Variant 3 -->
+               <div class="variant-item col-span-full" data-variant="Search Command Palette">
+                 <div class="flex justify-between items-center mb-4">
+                     <span class="text-[10px] font-black text-zinc-600 uppercase tracking-widest">03 CONSOLE</span>
+                     <button class="show-code-btn text-[8px] border border-zinc-800 px-2 py-1">SOURCE</button>
+                 </div>
+                 <div class="preview-area bg-bg-alt border border-border p-1">
+                     <div class="flex items-center gap-4 bg-zinc-950 px-6 py-4">
+                         <i class="bi bi-terminal text-primary"></i>
+                         <input type="text" placeholder="SEARCH PROTOCOLS..." class="w-full bg-transparent text-xs font-black uppercase tracking-widest outline-none placeholder:text-zinc-800" />
+                         <div class="flex gap-1">
+                             <span class="text-[8px] border border-zinc-800 px-1 py-0.5 text-zinc-600 font-black uppercase">CTR</span>
+                             <span class="text-[8px] border border-zinc-800 px-1 py-0.5 text-zinc-600 font-black uppercase">K</span>
+                         </div>
+                     </div>
+                 </div>
+               </div>
+            </div>
+          </article>
+
+          <!-- HEROES -->
+          <article data-type="heroes" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Immersive Heroes</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="Hero Split Visual">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 THE SPLIT CORE</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="layout-full-scroll border-2 border-border">
+                        <section class="grid lg:grid-cols-2 bg-bg text-white">
+                            <div class="p-12 lg:p-32 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border uppercase font-outfit">
+                                <span class="text-primary font-black tracking-[0.3em] text-[10px] mb-8 underline decoration-2 underline-offset-8">Logic Node // 14</span>
+                                <h1 class="text-6xl md:text-8xl font-black leading-none mb-12 tracking-tighter">Atomic <br>Systems.</h1>
+                                <p class="text-zinc-500 text-lg leading-relaxed max-w-md mb-12 lowercase font-sans">Composable architecture for teams that prioritize structural clarity over generic polish.</p>
+                                <div class="flex gap-4">
+                                    <button class="px-8 py-4 bg-primary text-zinc-950 font-black text-xs">GET ALLOY</button>
+                                    <button class="px-8 py-4 border border-zinc-700 text-zinc-500 font-bold text-xs hover:bg-zinc-900 transition-all">VIEW DOCS</button>
+                                </div>
+                            </div>
+                            <div class="bg-zinc-950 overflow-hidden relative p-12 flex items-center justify-center">
+                                <div class="absolute inset-0 grid-lines opacity-20"></div>
+                                <div class="w-96 aspect-square border border-border bg-bg pixel-border p-8 relative">
+                                    <div class="h-full border border-dashed border-zinc-800 flex flex-col justify-end p-8">
+                                        <div class="h-4 w-full bg-zinc-900 mb-2"></div>
+                                        <div class="h-4 w-3/4 bg-zinc-900 mb-2"></div>
+                                        <div class="h-4 w-full bg-primary"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="Hero Centered Impact">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 THE CENTER MASS</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area layout-full-scroll border-2 border-border grid-lines px-10">
+                        <section class="py-32 px-8 text-center bg-bg/80 backdrop-blur">
+                            <h2 class="text-7xl md:text-9xl font-black font-outfit tracking-tighter mb-12 uppercase leading-[0.8] italic">Engineered <br><span class="text-primary italic">Precision.</span></h2>
+                            <p class="text-zinc-500 text-xl max-w-2xl mx-auto mb-16 font-bold uppercase tracking-widest">Zero compromises on performance or precision.</p>
+                            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                                <button class="w-full md:w-auto px-12 py-6 bg-primary text-zinc-950 font-black text-xl border-2 border-primary hover:bg-transparent hover:text-primary transition-all uppercase">Start Build</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Variant 3 -->
+                <div class="variant-item" data-variant="Hero Narrative Text">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 THE NARRATIVE</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area layout-full-scroll border-2 border-border grid-lines p-12">
+                        <section class="max-w-4xl mx-auto py-24 px-12 bg-bg border border-border p-12">
+                            <p class="text-4xl md:text-6xl font-black font-outfit uppercase leading-tight mb-16 italic">"We built an industrial foundation for the next generation of digital architecture."</p>
+                            <div class="h-2 w-24 bg-primary px-4 mb-8"></div>
+                            <div class="flex justify-between items-end">
+                                <div class="text-[10px] font-black uppercase text-zinc-600">ALLOY_v1.0.0</div>
+                                <button class="text-primary font-black uppercase tracking-widest border-b-2 border-primary">Explore Foundations</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Variant 4: Visual Core Hero -->
+                <div class="variant-item" data-variant="Visual Core Hero">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 CORE_GEOMETRY</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area layout-full-scroll border-2 border-border grid-lines relative p-20 py-40 flex items-center justify-center">
+                         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,var(--color-primary)_1px,transparent_1px)] bg-size-[40px_40px]"></div>
+                         <div class="z-10 text-center max-w-4xl">
+                            <h3 class="text-8xl md:text-[12rem] font-black font-outfit uppercase leading-[0.8] mb-12 tracking-tighter italic">Alloy <br><span class="text-primary">Core.</span></h3>
+                            <button class="px-16 py-8 border-4 border-primary text-primary font-black uppercase text-2xl hover:bg-primary hover:text-bg transition-all">Initialize_v4</button>
+                         </div>
+                    </div>
+                </div>
+                <!-- Variant 5: Command Console Hero -->
+                <div class="variant-item" data-variant="Command Console Hero">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">05 TERMINAL_CMD</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area layout-full-scroll border-2 border-border bg-bg p-8 font-mono">
+                         <div class="bg-zinc-900 border border-border overflow-hidden max-w-2xl mx-auto">
+                             <div class="px-4 py-2 bg-zinc-800 border-b border-border flex items-center justify-between">
+                                 <span class="text-[10px] font-bold text-zinc-500">alloy@core: ~</span>
+                                 <div class="flex gap-1.5">
+                                     <div class="w-2 h-2 rounded-full bg-rose-500/50"></div>
+                                     <div class="w-2 h-2 rounded-full bg-amber-500/50"></div>
+                                     <div class="w-2 h-2 rounded-full bg-emerald-500/50"></div>
+                                 </div>
+                             </div>
+                             <div class="p-6 text-emerald-500 text-xs leading-relaxed">
+                                 <p class="mb-2"><span class="text-zinc-500">$</span> alloy init --foundation</p>
+                                 <p class="mb-2">[OK] Scoping architecture...</p>
+                                 <p class="mb-2 font-black text-white italic">[DONE] Core logic established.</p>
+                                 <p class="mb-4 text-primary animate-pulse">_</p>
+                                 <button class="px-6 py-2 border border-emerald-500 text-emerald-500 text-[10px] font-bold uppercase hover:bg-emerald-500 hover:text-bg transition-all">Deploy.x0</button>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Variant 6: Split Visual Hero -->
+                <div class="variant-item" data-variant="Split Visual Hero">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">06 SPLIT_VISUAL</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area items-stretch border-2 border-border overflow-hidden">
+                        <section class="grid lg:grid-cols-2 bg-bg min-h-[500px]">
+                            <div class="p-16 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border">
+                                <h2 class="text-5xl font-black font-outfit uppercase italic tracking-tighter leading-none mb-8">Structural <br>Integrity_</h2>
+                                <p class="text-zinc-500 text-sm font-bold uppercase tracking-widest leading-relaxed mb-12">Building foundations that scale with your logic, not just your layout.</p>
+                                <div class="flex gap-4">
+                                     <button class="px-8 py-4 bg-primary text-bg font-black uppercase text-xs">Initialize</button>
+                                </div>
+                            </div>
+                            <div class="bg-zinc-900 relative flex items-center justify-center p-12 overflow-hidden">
+                                 <div class="absolute inset-0 grid-lines opacity-10"></div>
+                                 <div class="relative w-full aspect-video border-2 border-primary bg-zinc-950 pixel-border p-4">
+                                      <div class="h-full border border-dashed border-zinc-700 flex flex-col justify-center items-center gap-4">
+                                           <div class="w-12 h-1 bg-primary"></div>
+                                           <div class="w-24 h-1 bg-zinc-800"></div>
+                                           <div class="w-16 h-1 bg-primary"></div>
+                                      </div>
+                                 </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- FEATURES -->
+          <article data-type="features" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Foundations</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="Feature Grid">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 PIXEL GRID</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area grid md:grid-cols-3 border border-border">
+                        <div class="p-12 border-b md:border-b-0 md:border-r border-border hover:bg-zinc-900 transition-all text-white">
+                            <div class="w-12 h-12 bg-primary flex items-center justify-center font-black text-zinc-950 mb-8 font-outfit">A</div>
+                            <h4 class="text-xl font-bold mb-4 uppercase">Logic Driven</h4>
+                            <p class="text-zinc-500 text-sm leading-relaxed">Components following a strict mathematical foundation.</p>
+                        </div>
+                        <div class="p-12 border-b md:border-b-0 md:border-r border-border hover:bg-zinc-900 transition-all text-white">
+                            <div class="w-12 h-12 bg-zinc-800 flex items-center justify-center font-black text-white mb-8 font-outfit">B</div>
+                            <h4 class="text-xl font-bold mb-4 uppercase">Zero Bloat</h4>
+                            <p class="text-zinc-500 text-sm leading-relaxed">Clean, efficient Tailwind utility patterns.</p>
+                        </div>
+                        <div class="p-12 hover:bg-zinc-900 transition-all text-white">
+                            <div class="w-12 h-12 bg-zinc-800 flex items-center justify-center font-black text-white mb-8 font-outfit">C</div>
+                            <h4 class="text-xl font-bold mb-4 uppercase">Modular.</h4>
+                            <p class="text-zinc-500 text-sm leading-relaxed">Standardized intersections and scales.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="Visual Feature Split">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 INTERFACE MERGE</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area border-2 border-border grid md:grid-cols-2">
+                        <div class="p-12 lg:p-20 bg-bg border-b md:border-b-0 md:border-r border-border">
+                            <h3 class="text-4xl font-black font-outfit uppercase mb-8 italic text-white">Raw <br>Interface.</h3>
+                            <p class="text-zinc-500 mb-12 leading-relaxed">Anti-aliasing on all core font-weights.</p>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 border border-primary flex items-center justify-center text-primary font-black">01</div>
+                                <div class="w-10 h-10 border border-zinc-700 flex items-center justify-center text-zinc-700 font-black">02</div>
+                                <div class="w-10 h-10 border border-zinc-700 flex items-center justify-center text-zinc-700 font-black">03</div>
+                            </div>
+                        </div>
+                        <div class="bg-zinc-950 p-12 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 grid-lines opacity-10"></div>
+                            <div class="w-full h-40 border border-dashed border-zinc-700"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 3 -->
+                <div class="variant-item" data-variant="Features List Blocky">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 THE STACK</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area space-y-px bg-border border border-border">
+                        <div class="p-8 bg-bg flex items-center justify-between hover:bg-zinc-900 transition-all">
+                            <span class="text-xs font-black uppercase tracking-widest">Global State Logic</span>
+                            <i class="bi bi-arrow-right text-primary"></i>
+                        </div>
+                        <div class="p-8 bg-bg flex items-center justify-between hover:bg-zinc-900 transition-all">
+                            <span class="text-xs font-black uppercase tracking-widest">Atomic Prop System</span>
+                            <i class="bi bi-arrow-right text-primary"></i>
+                        </div>
+                        <div class="p-8 bg-bg flex items-center justify-between hover:bg-zinc-900 transition-all">
+                            <span class="text-xs font-black uppercase tracking-widest">Pixel Grid Engine</span>
+                            <i class="bi bi-arrow-right text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 4: Hover Cards Feature Grid -->
+                <div class="variant-item" data-variant="Hover Grid Logic">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 HOVER SYSTEM LOGIC</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area grid md:grid-cols-2 lg:grid-cols-4 gap-6 bg-transparent">
+                        <div class="p-8 border-2 border-border bg-bg hover:border-primary hover:-translate-y-2 transition-all cursor-pointer group">
+                            <i class="bi bi-cpu-fill text-3xl text-zinc-600 mb-6 group-hover:text-primary transition-all block"></i>
+                            <h4 class="text-xs font-black uppercase mb-4 text-white">Logic Processing</h4>
+                            <p class="text-[10px] uppercase font-bold text-zinc-500">Fast logic resolution protocols.</p>
+                        </div>
+                        <div class="p-8 border-2 border-border bg-bg hover:border-primary hover:-translate-y-2 transition-all cursor-pointer group">
+                            <i class="bi bi-shield-lock-fill text-3xl text-zinc-600 mb-6 group-hover:text-primary transition-all block"></i>
+                            <h4 class="text-xs font-black uppercase mb-4 text-white">Encrypted Core</h4>
+                            <p class="text-[10px] uppercase font-bold text-zinc-500">Security-first architecture design.</p>
+                        </div>
+                        <div class="p-8 border-2 border-border bg-bg hover:border-primary hover:-translate-y-2 transition-all cursor-pointer group">
+                            <i class="bi bi-hdd-network-fill text-3xl text-zinc-600 mb-6 group-hover:text-primary transition-all block"></i>
+                            <h4 class="text-xs font-black uppercase mb-4 text-white">Network Sync</h4>
+                            <p class="text-[10px] uppercase font-bold text-zinc-500">Real-time global state replication.</p>
+                        </div>
+                        <div class="p-8 border-2 border-border bg-bg hover:border-primary hover:-translate-y-2 transition-all cursor-pointer group">
+                            <i class="bi bi-lightning-charge-fill text-3xl text-zinc-600 mb-6 group-hover:text-primary transition-all block"></i>
+                            <h4 class="text-xs font-black uppercase mb-4 text-white">Zero Latency</h4>
+                            <p class="text-[10px] uppercase font-bold text-zinc-500">Instant component render engine.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- PRICING -->
+          <article data-type="pricing" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Unit Pricing</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="Pricing Tier Blocky">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 GRID PRICING</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area grid md:grid-cols-3 gap-px bg-border border border-border">
+                        <div class="p-12 bg-bg">
+                            <h4 class="text-xs font-black text-zinc-600 uppercase mb-8">Node // 01</h4>
+                            <div class="text-4xl font-black mb-8 italic">$0</div>
+                            <button class="w-full py-4 border border-zinc-800 text-zinc-600 font-black text-[10px] uppercase tracking-widest">Initialize</button>
+                        </div>
+                        <div class="p-12 bg-bg border-x-4 border-x-primary">
+                            <h4 class="text-xs font-black text-primary uppercase mb-8">Core // 02</h4>
+                            <div class="text-4xl font-black mb-8 italic">$49</div>
+                            <button class="w-full py-4 bg-primary text-zinc-950 font-black text-[10px] uppercase tracking-widest">Get Primary</button>
+                        </div>
+                        <div class="p-12 bg-bg">
+                            <h4 class="text-xs font-black text-zinc-600 uppercase mb-8">Nexus // 03</h4>
+                            <div class="text-4xl font-black mb-8 italic">$149</div>
+                            <button class="w-full py-4 border border-zinc-800 text-zinc-600 font-black text-[10px] uppercase tracking-widest">Connect</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="Pricing Comparison">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 LOGIC COMPARISON</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border">
+                        <div class="grid grid-cols-2 border-b border-border">
+                            <div class="p-6 font-black uppercase text-[10px] border-r border-border text-zinc-500">Foundations</div>
+                            <div class="p-6 text-center text-primary font-black uppercase text-[10px]">Included</div>
+                        </div>
+                        <div class="grid grid-cols-2 border-b border-border">
+                            <div class="p-6 font-black uppercase text-[10px] border-r border-border text-zinc-500">Pixel Engine</div>
+                            <div class="p-6 text-center text-primary font-black uppercase text-[10px]">Pro Only</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 3 -->
+                <div class="variant-item" data-variant="Pricing Minimal Inline">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 INLINE UNIT</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-8 border-2 border-primary bg-bg flex items-center justify-between">
+                        <div>
+                            <div class="text-2xl font-black font-outfit uppercase italic text-white leading-tight">Professional Stack</div>
+                            <div class="text-[10px] font-black text-zinc-600 uppercase tracking-widest">Billed annually // Unlimited components</div>
+                        </div>
+                        <button class="px-8 py-4 bg-primary text-zinc-950 font-black uppercase tracking-widest text-xs">Access // $299</button>
+                    </div>
+                </div>
+
+                <!-- Variant 4: Enterprise logic -->
+                <div class="variant-item" data-variant="Enterprise Expanded">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 ENTERPRISE_SLOT</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border bg-bg p-12 flex flex-col items-center text-center">
+                         <div class="text-[8px] font-black text-primary border border-primary px-4 py-1 mb-8">PROTOCOL: NEXUS_ELITE</div>
+                         <h3 class="text-5xl font-black font-outfit uppercase italic mb-8 text-white">Custom Core <br>Infrastructure.</h3>
+                         <div class="h-px w-24 bg-zinc-800 mb-12"></div>
+                         <button class="bg-zinc-900 border border-border px-12 py-6 text-xs font-black uppercase tracking-widest hover:border-primary transition-all text-white">Request Dedicated Logic</button>
+                    </div>
+                </div>
+
+                <!-- Variant 5: Logic Comparison Matrix -->
+                <div class="variant-item" data-variant="Features Matrix">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">05 FEATURES_MATRIX</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area border-2 border-border bg-bg overflow-x-auto scollbar-hide">
+                         <table class="w-full text-left border-collapse min-w-[600px]">
+                             <thead>
+                                 <tr class="bg-zinc-900 border-b border-border">
+                                     <th class="p-8 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">Core Feature</th>
+                                     <th class="p-8 text-[10px] font-black uppercase tracking-[0.2em] text-center text-zinc-500">Node</th>
+                                     <th class="p-8 text-[10px] font-black uppercase tracking-[0.2em] text-center text-primary">Nexus</th>
+                                     <th class="p-8 text-[10px] font-black uppercase tracking-[0.2em] text-center text-zinc-500">Elite</th>
+                                 </tr>
+                             </thead>
+                             <tbody class="divide-y divide-border">
+                                 <tr>
+                                     <td class="p-8 text-xs font-bold text-zinc-300">Atomic Component Access</td>
+                                     <td class="p-8 text-center text-primary font-black">✓</td>
+                                     <td class="p-8 text-center text-primary font-black">✓</td>
+                                     <td class="p-8 text-center text-primary font-black">✓</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-8 text-xs font-bold text-zinc-300">Custom Protocol Tokens</td>
+                                     <td class="p-8 text-center text-zinc-800">_</td>
+                                     <td class="p-8 text-center text-primary font-black">✓</td>
+                                     <td class="p-8 text-center text-primary font-black">✓</td>
+                                 </tr>
+                                 <tr>
+                                     <td class="p-8 text-xs font-bold text-zinc-300">Dedicated Support Node</td>
+                                     <td class="p-8 text-center text-zinc-800">_</td>
+                                     <td class="p-8 text-center text-zinc-800">_</td>
+                                     <td class="p-8 text-center text-primary font-black">✓</td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- TABLES -->
+          <article data-type="tables" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Data Structures</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Variant 1: Industrial Table -->
+                <div class="variant-item" data-variant="Industrial Data Table">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 INDUSTRIAL_GRID</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border bg-bg overflow-x-auto scollbar-hide">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-zinc-900/50 border-b border-border">
+                                    <th class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Node ID</th>
+                                    <th class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Protocol</th>
+                                    <th class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Status</th>
+                                    <th class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest">Integrity</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border">
+                                <tr class="hover:bg-zinc-900/40 transition-colors">
+                                    <td class="p-6 text-xs font-bold font-mono">X-492-CORE</td>
+                                    <td class="p-6 text-xs font-bold">SYPHON_v4</td>
+                                    <td class="p-6">
+                                        <span class="px-2 py-1 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 text-[8px] font-black uppercase">Active</span>
+                                    </td>
+                                    <td class="p-6">
+                                        <div class="w-full bg-zinc-900 h-1">
+                                            <div class="bg-primary h-full w-[80%]"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-zinc-900/40 transition-colors">
+                                    <td class="p-6 text-xs font-bold font-mono">B-108-VAULT</td>
+                                    <td class="p-6 text-xs font-bold">LOCK_RSA</td>
+                                    <td class="p-6">
+                                        <span class="px-2 py-1 bg-zinc-500/10 text-zinc-500 border border-zinc-500/20 text-[8px] font-black uppercase">Standby</span>
+                                    </td>
+                                    <td class="p-6">
+                                        <div class="w-full bg-zinc-900 h-1">
+                                            <div class="bg-zinc-700 h-full w-[40%]"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Variant 2: Feature Comparison Grid -->
+                <div class="variant-item" data-variant="Feature Comparison Grid">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 LOGIC_COMPARISON</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border bg-bg overflow-hidden">
+                        <div class="grid grid-cols-4 bg-zinc-900/50 border-b border-border">
+                            <div class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest col-span-1">Architecture</div>
+                            <div class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-center border-l border-border">Base</div>
+                            <div class="p-6 text-[10px] font-black text-primary uppercase tracking-widest text-center border-x border-border">Pro</div>
+                            <div class="p-6 text-[10px] font-black text-zinc-500 uppercase tracking-widest text-center">Elite</div>
+                        </div>
+                        <div class="grid grid-cols-4 border-b border-border items-center">
+                            <div class="p-6 text-xs font-bold">Pixel Precision Logic</div>
+                            <div class="p-6 text-center border-l border-border"><i class="bi bi-check2 text-primary"></i></div>
+                            <div class="p-6 text-center border-x border-border"><i class="bi bi-check2 text-primary"></i></div>
+                            <div class="p-6 text-center"><i class="bi bi-check2 text-primary"></i></div>
+                        </div>
+                        <div class="grid grid-cols-4 items-center">
+                            <div class="p-6 text-xs font-bold">Industrial Animations</div>
+                            <div class="p-6 text-center border-l border-border"><i class="bi bi-dash text-zinc-800"></i></div>
+                            <div class="p-6 text-center border-x border-border"><i class="bi bi-check2 text-primary"></i></div>
+                            <div class="p-6 text-center"><i class="bi bi-check2 text-primary"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 3: Expanding Row Table -->
+                <div class="variant-item" data-variant="Expanding Row Logic">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 DATA_EXPAND</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border bg-bg overflow-hidden flex flex-col">
+                        <div class="p-4 bg-zinc-950 border-b border-border flex gap-4 text-[10px] font-black text-zinc-500 uppercase tracking-widest">
+                             <div class="w-8">Wait</div>
+                             <div class="flex-1">Repository Name</div>
+                             <div class="w-32 hidden md:block">Build Status</div>
+                             <div class="w-24 text-right">Metric</div>
+                        </div>
+                        <div class="group border-b border-border hover:bg-zinc-900 transition-all cursor-pointer">
+                            <div class="p-4 flex gap-4 items-center">
+                                 <div class="w-8 text-zinc-500 group-hover:text-primary transition-all"><i class="bi bi-arrow-right text-xs"></i></div>
+                                 <div class="flex-1 font-bold text-xs uppercase text-white">project-alloy-core</div>
+                                 <div class="w-32 hidden md:flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div><span class="text-[10px] uppercase font-bold text-zinc-400">Pass</span></div>
+                                 <div class="w-24 text-[10px] uppercase font-black text-primary text-right">99.9%</div>
+                            </div>
+                        </div>
+                        <div class="group hover:bg-zinc-900 transition-all cursor-pointer">
+                            <div class="p-4 flex gap-4 items-center">
+                                 <div class="w-8 text-zinc-500 group-hover:text-amber-500 transition-all"><i class="bi bi-arrow-right text-xs"></i></div>
+                                 <div class="flex-1 font-bold text-xs uppercase text-white">vault-infrastructure</div>
+                                 <div class="w-32 hidden md:flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></div><span class="text-[10px] uppercase font-bold text-zinc-400">Syncing</span></div>
+                                 <div class="w-24 text-[10px] uppercase font-black text-amber-500 text-right">45.2%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- CTA -->
+          <article data-type="cta" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Incentives</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="CTA Blocky Flush">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 FLUSH INCENTIVE</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary px-3 py-1 border border-primary">SOURCE</button>
+                    </div>
+                    <div class="preview-area bg-primary p-12 lg:p-24 text-zinc-950 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 grid-lines opacity-10"></div>
+                        <h3 class="text-4xl md:text-6xl font-black font-outfit tracking-tighter mb-8 uppercase relative z-10 italic">Engineered <br>for builders.</h3>
+                        <div class="flex justify-center gap-4 relative z-10">
+                            <button class="px-10 py-5 bg-zinc-950 text-primary font-black uppercase text-xs">Initialize Explorer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="CTA Split Action">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 SPLIT COMMAND</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area grid md:grid-cols-2 border border-border bg-bg">
+                        <div class="p-12 border-b md:border-b-0 md:border-r border-border">
+                            <h4 class="text-2xl font-black uppercase mb-4 text-white">Ready to <br>deploy?</h4>
+                        </div>
+                        <div class="p-12 flex flex-col justify-center">
+                            <button class="px-8 py-4 bg-zinc-800 text-white font-black uppercase text-xs hover:bg-primary hover:text-zinc-950 transition-all">Connect Repository</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 3: Terminal Subscription -->
+                <div class="variant-item" data-variant="Terminal Pulse CTA">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 TERMINAL PULSE</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area border-2 border-border grid md:grid-cols-2">
+                        <div class="p-12 lg:p-16 flex flex-col justify-center bg-bg">
+                            <h4 class="text-3xl font-black uppercase font-outfit mb-4 text-white">System Logs.</h4>
+                            <p class="text-zinc-500 text-xs font-bold leading-relaxed mb-8">Subscribe to get notifications about protocol implementations and component updates.</p>
+                            <div class="flex">
+                                <input type="email" placeholder="Your Terminal Address" class="w-full bg-zinc-900 border border-border p-4 text-xs font-bold text-white placeholder-zinc-700 outline-none focus:border-primary">
+                                <button class="px-8 py-4 bg-primary text-zinc-950 font-black text-[10px] uppercase hover:bg-white transition-colors">Listen</button>
+                            </div>
+                        </div>
+                        <div class="p-12 bg-zinc-950 border-t md:border-t-0 md:border-l border-border flex items-center justify-center overflow-hidden relative">
+                             <div class="absolute inset-0 grid-lines opacity-10"></div>
+                             <div class="w-32 h-32 border border-primary/30 rounded-full flex items-center justify-center animate-pulse group hover:border-primary cursor-pointer transition-all">
+                                 <div class="w-16 h-16 border border-primary/60 rounded-full flex items-center justify-center">
+                                      <div class="w-4 h-4 bg-primary rounded-full group-hover:scale-150 transition-transform"></div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- TESTIMONIALS -->
+          <article data-type="testimonials" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Proof</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Variant 1: Grid Base -->
+                <div class="variant-item" data-variant="Testimonial Grid">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 PROOF_GRID</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
+                        <div class="p-12 bg-bg hover:bg-zinc-900 transition-all">
+                            <p class="text-sm font-bold mb-12 italic text-zinc-300">"Terminal aesthetic done right. Structural grid is a lifesaver for industrial apps."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-zinc-950 font-black text-[8px]">MR</div>
+                                <div class="text-[10px] font-black uppercase">Marcus R. <span class="text-zinc-600 block tracking-widest font-bold mt-1 text-[8px]">Foundry Inc</span></div>
+                            </div>
+                        </div>
+                        <div class="p-12 bg-bg hover:bg-zinc-900 transition-all">
+                            <p class="text-sm font-bold mb-12 italic text-zinc-300">"The only library that prioritizes architecture over polish. Pure logic."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-white font-black text-[8px]">EV</div>
+                                <div class="text-[10px] font-black uppercase">Elena V. <span class="text-zinc-600 block tracking-widest font-bold mt-1 text-[8px]">Protocol.io</span></div>
+                            </div>
+                        </div>
+                        <div class="p-12 bg-bg hover:bg-zinc-900 transition-all">
+                            <p class="text-sm font-bold mb-12 italic text-zinc-300">"Shifted our entire tokens to Alloy. It's inevitable. Pixel perfect."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-white font-black text-[8px]">SV</div>
+                                <div class="text-[10px] font-black uppercase">Silas V. <span class="text-zinc-600 block tracking-widest font-bold mt-1 text-[8px]">Core Logic</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2: Customer Logos -->
+                <div class="variant-item" data-variant="Customer Proof Bar">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 LOGO_VAULT</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-8 border border-border bg-bg flex flex-wrap justify-center gap-16 items-center opacity-50 grayscale hover:grayscale-0 transition-all">
+                         <span class="text-2xl font-black font-outfit tracking-tighter uppercase italic">Protocol.</span>
+                         <span class="text-2xl font-black font-outfit tracking-tighter uppercase">Foundry_</span>
+                         <span class="text-2xl font-black font-outfit tracking-tighter uppercase underline decoration-primary">Vault </span>
+                         <span class="text-2xl font-black font-outfit tracking-tighter uppercase italic">Nexus.</span>
+                    </div>
+                </div>
+
+                <!-- Variant 3: Professional Quote -->
+                <div class="variant-item" data-variant="Professional Feature Quote">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 FEATURE_LOG</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-16 border border-border bg-bg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-8 text-8xl text-zinc-900 font-black pointer-events-none select-none">"</div>
+                        <div class="relative z-10 max-w-2xl">
+                             <div class="flex gap-1 mb-6">
+                                 <i class="bi bi-star-fill text-primary text-[10px]"></i>
+                                 <i class="bi bi-star-fill text-primary text-[10px]"></i>
+                                 <i class="bi bi-star-fill text-primary text-[10px]"></i>
+                                 <i class="bi bi-star-fill text-primary text-[10px]"></i>
+                                 <i class="bi bi-star-fill text-primary text-[10px]"></i>
+                             </div>
+                             <p class="text-2xl font-black font-outfit uppercase tracking-tight mb-12">"Alloy redefined how we handle structural systems. It's not just a UI library; it's a protocol for visual consistency."</p>
+                             <div class="flex items-center gap-6">
+                                 <div class="w-12 h-12 bg-primary"></div>
+                                 <div class="font-black uppercase">
+                                     <div class="text-xs">Dr. Julian Vane</div>
+                                     <div class="text-[8px] text-zinc-500 tracking-widest mt-1 italic">Head of Logic @ Quantum Systems</div>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 4: Review Highlight -->
+                <div class="variant-item" data-variant="Review Highlight Structure">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 REVIEW HIGHLIGHT</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border bg-bg flex flex-col md:flex-row items-stretch">
+                         <div class="p-12 md:p-16 flex-1 flex flex-col justify-center">
+                             <div class="flex items-center gap-2 mb-6 text-primary">
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <i class="bi bi-star-fill"></i>
+                                 <span class="text-[10px] font-black uppercase text-zinc-500 ml-4 border-l border-zinc-700 pl-4">Verified Sync</span>
+                             </div>
+                             <h4 class="text-3xl font-black uppercase font-outfit text-white leading-tight mb-8">Flawless Integration <br>and execution.</h4>
+                             <p class="text-zinc-400 text-sm font-bold leading-relaxed max-w-lg">The absolute precision of these components means we cut our frontend logic scoping time in half. It feels inevitable.</p>
+                         </div>
+                         <div class="w-full md:w-80 bg-zinc-900 border-t md:border-t-0 md:border-l border-border p-12 flex flex-col justify-between relative overflow-hidden">
+                             <div class="absolute inset-0 grid-lines opacity-10"></div>
+                             <div class="relative z-10 w-16 h-16 border-2 border-primary border-dashed mb-16 mx-auto md:mx-0">
+                                 <div class="w-full h-full bg-zinc-900 absolute top-2 left-2 border border-border flex items-center justify-center font-outfit font-black text-xl text-zinc-500">EK</div>
+                             </div>
+                             <div class="relative z-10 text-center md:text-left">
+                                 <div class="text-xs font-black uppercase text-white tracking-widest mb-1">Elias Kraft</div>
+                                 <div class="text-[10px] font-bold uppercase text-zinc-500 italic min-w-max">Lead Ops, Core Dynamics</div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- FOOTERS -->
+          <article data-type="footers" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Footers</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="Mega Footer Grid">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 MEGA GRID</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border p-12 bg-bg">
+                        <div class="grid md:grid-cols-4 gap-12 border-b border-border pb-12 mb-12">
+                            <div class="col-span-2">
+                                <div class="font-black text-2xl tracking-tighter uppercase mb-4 text-white">ALLOY_FOUNDATION.</div>
+                                <p class="text-zinc-600 max-w-xs text-xs">Architectural UI foundations for industrial-grade web dev.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-[8px] font-black text-zinc-500 uppercase">Vault</h4>
+                                <a href="#" class="block text-[10px] font-black uppercase text-zinc-300 hover:text-primary transition-colors">Docs</a>
+                                <a href="#" class="block text-[10px] font-black uppercase text-zinc-300 hover:text-primary transition-colors">Elements</a>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-[8px] font-black text-zinc-700 uppercase">
+                            <span>&copy; 2024 ALLOY SYSTEMS</span>
+                            <span>v1.0.0 Stable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="Minimal Footer Center">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 CENTERED BLOCK</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area py-12 bg-bg border border-border text-center">
+                        <div class="flex justify-center gap-8 mb-8">
+                             <a href="#" class="text-[10px] font-black uppercase text-zinc-400 hover:text-primary transition-all">Twitter [X]</a>
+                             <a href="https://github.com/Infinitode/Alloy" target="_blank" class="text-[10px] font-black uppercase text-zinc-400 hover:text-primary transition-all">GitHub [G]</a>
+                             <a href="#" class="text-[10px] font-black uppercase text-zinc-400 hover:text-primary transition-all">Discord [D]</a>
+                        </div>
+                        <div class="text-[8px] font-black text-zinc-800 uppercase tracking-widest">Proprietary logic system &copy; 2024</div>
+                    </div>
+                </div>
+
+                <!-- Variant 3 -->
+                <div class="variant-item" data-variant="Structural Footer Bar">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">03 CONSOLE FOOTER</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-6 bg-zinc-950 border border-zinc-800 flex justify-between items-center">
+                        <div class="text-[8px] font-black text-zinc-500 tracking-[0.2em] uppercase">Status: Production // Regional: Global</div>
+                        <div class="text-[8px] font-black text-zinc-500 tracking-widest uppercase italic">Powered by ALLOY CORE</div>
+                    </div>
+                </div>
+
+                <!-- Variant 4: Expanded Directory -->
+                <div class="variant-item" data-variant="Expanded Directory">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 MASSIVE SITEMAP</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area pt-24 pb-12 px-12 bg-zinc-950 border-t-4 border-primary border-x border-b border-border">
+                        <div class="grid grid-cols-2 md:grid-cols-6 gap-12 mb-20">
+                            <div class="col-span-2 md:col-span-2">
+                                <h4 class="text-3xl font-black font-outfit uppercase tracking-tighter text-white mb-6">ALLOY.IO</h4>
+                                <p class="text-zinc-500 text-xs font-bold leading-relaxed mb-8">Building the structural web. One block at a time. No fluff, just pure architectural power.</p>
+                                <div class="flex gap-4">
+                                     <a href="#" class="w-10 h-10 border border-border flex items-center justify-center text-zinc-500 hover:text-primary hover:border-primary transition-all"><i class="bi bi-twitter-x"></i></a>
+                                     <a href="https://github.com/Infinitode/Alloy" target="_blank" class="w-10 h-10 border border-border flex items-center justify-center text-zinc-500 hover:text-primary hover:border-primary transition-all"><i class="bi bi-github"></i></a>
+                                     <a href="#" class="w-10 h-10 border border-border flex items-center justify-center text-zinc-500 hover:text-primary hover:border-primary transition-all"><i class="bi bi-discord"></i></a>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-6">Logic Core</h5>
+                                <div class="space-y-4">
+                                    <a href="#" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">Components</a>
+                                    <a href="#" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">Layouts</a>
+                                    <a href="#" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">Templates</a>
+                                    <a href="#" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">Showcase</a>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-6">Resources</h5>
+                                <div class="space-y-4">
+                                    <a href="#" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">Documentation</a>
+                                    <a href="https://github.com/Infinitode/Alloy" target="_blank" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">GitHub Repo</a>
+                                    <a href="#" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">Figma Design</a>
+                                    <a href="https://github.com/Infinitode/Alloy#readme" target="_blank" class="block text-xs font-bold text-zinc-400 hover:text-white transition-all">README Tracker</a>
+                                </div>
+                            </div>
+                            <div class="col-span-2 md:col-span-2">
+                                <h5 class="text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-6">Terminal Updates</h5>
+                                <p class="text-xs font-bold text-zinc-500 mb-4">Subscribe to receive system logic updates.</p>
+                                <div class="flex">
+                                    <input type="email" placeholder="Email Address" class="w-full bg-zinc-900 border border-border p-3 text-xs text-white placeholder-zinc-700 outline-none focus:border-primary">
+                                    <button class="px-6 py-3 bg-primary text-zinc-950 font-black text-[10px] uppercase tracking-widest hover:bg-white transition-colors">Patch</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                             <div class="text-[10px] font-black text-zinc-600 uppercase tracking-widest">&copy; 2026 Alloy Industrial. All rights reserved.</div>
+                             <div class="flex gap-6">
+                                 <a href="#" class="text-[10px] font-black text-zinc-600 uppercase hover:text-zinc-400">Privacy Protocol</a>
+                                 <a href="#" class="text-[10px] font-black text-zinc-600 uppercase hover:text-zinc-400">Terms of Service</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- FEEDBACK -->
+          <article data-type="feedback" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">System Status</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="Industrial Warning">
+                    <div class="preview-area p-6 bg-amber-500/5 border-l-4 border-amber-500 flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-exclamation-triangle-fill text-amber-500"></i>
+                            <span class="text-xs font-black uppercase tracking-widest text-amber-500/80">Kernel Override: Integrity Compromised</span>
+                        </div>
+                        <button class="show-code-btn text-[8px] font-black text-amber-500 px-2 py-1 border border-amber-500/30">SOURCE</button>
+                    </div>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="System Success">
+                    <div class="preview-area p-6 bg-emerald-500/5 border border-emerald-500/20 flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-shield-check text-emerald-500"></i>
+                            <span class="text-xs font-black uppercase tracking-widest">Logic Deployment Successful</span>
+                        </div>
+                        <button class="show-code-btn text-[8px] font-black text-emerald-500 px-2 py-1 border border-emerald-500/30">SOURCE</button>
+                    </div>
+                </div>
+
+                <!-- Variant 3 -->
+                <div class="variant-item" data-variant="Data Error">
+                    <div class="preview-area p-6 bg-rose-500/5 border-2 border-rose-500 border-dashed flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <i class="bi bi-x-octagon-fill text-rose-500"></i>
+                            <span class="text-xs font-black uppercase tracking-widest">Protocol ERROR_049: Identity Node Missing</span>
+                        </div>
+                        <button class="show-code-btn text-[8px] font-black text-rose-500 px-2 py-1 border border-rose-500/30">SOURCE</button>
+                    </div>
+                </div>
+
+                <!-- Variant 4: Success Toast -->
+                <div class="variant-item" data-variant="System Success Toast">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">04 SUCCESS_LOG</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 hover:bg-primary hover:text-zinc-950 transition-all">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-8 border border-border bg-bg flex items-center justify-between">
+                        <div class="flex items-center gap-6">
+                            <div class="w-12 h-12 bg-emerald-500 flex items-center justify-center font-black text-zinc-950">✓</div>
+                            <span class="text-sm font-black uppercase tracking-widest text-emerald-500">Node Sync Complete // 100% Integrity</span>
+                        </div>
+                        <i class="bi bi-check-circle-fill text-emerald-500 text-xl"></i>
+                    </div>
+                </div>
+
+                <!-- Variant 5: Notification Stack -->
+                <div class="variant-item" data-variant="System Notification Stack">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">05 TOAST_STACK</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-12 bg-zinc-950/50 border border-border relative min-h-[300px] flex flex-col justify-end gap-3 items-end overflow-hidden">
+                         <div class="w-72 p-4 bg-bg border border-border shadow-2xl flex items-center justify-between relative z-10">
+                             <div class="flex items-center gap-3">
+                                 <div class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_var(--color-primary)]"></div>
+                                 <span class="text-[10px] font-black uppercase">Deployment_Active</span>
+                             </div>
+                             <i class="bi bi-x text-zinc-500"></i>
+                         </div>
+                         <div class="w-72 p-4 bg-bg border border-border shadow-2xl flex items-center justify-between opacity-80 scale-95 origin-bottom relative z-0">
+                             <div class="flex items-center gap-3">
+                                 <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                                 <span class="text-[10px] font-black uppercase text-zinc-300">Sync_Complete</span>
+                             </div>
+                             <i class="bi bi-check2 text-emerald-500"></i>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Variant 6: Modal Alert -->
+                <div class="variant-item" data-variant="Industrial Modal Alert">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">06 CORE_MODAL_HALT</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1 font-outfit">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-24 bg-zinc-950 border border-border flex items-center justify-center">
+                         <div class="w-full max-w-sm bg-bg border border-border pixel-border p-0">
+                             <div class="px-6 py-3 bg-zinc-900 border-b border-border flex items-center justify-between">
+                                 <span class="text-[10px] font-black uppercase tracking-widest text-zinc-500">System Override Request</span>
+                                 <i class="bi bi-x-lg text-zinc-700 text-[10px]"></i>
+                             </div>
+                             <div class="p-8">
+                                 <div class="flex items-center gap-6 mb-8">
+                                     <div class="w-12 h-12 border border-primary flex items-center justify-center text-primary text-xl">
+                                         <i class="bi bi-shield-lock-fill"></i>
+                                     </div>
+                                     <div class="flex-1">
+                                         <h4 class="text-sm font-black uppercase mb-1 text-white underline decoration-primary font-outfit">Authorization Required</h4>
+                                         <p class="text-zinc-500 text-[10px] font-bold italic lowercase">Verify protocol signature to proceed with core dump.</p>
+                                     </div>
+                                 </div>
+                                 <div class="flex flex-col gap-2">
+                                     <button class="w-full py-3 bg-primary text-zinc-950 font-black text-[10px] uppercase">Authorize.x001</button>
+                                     <button class="w-full py-3 border border-border text-zinc-600 font-bold text-[10px] uppercase hover:bg-zinc-900 transition-all font-outfit">Cancel_Abort</button>
+                                 </div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- NAVIGATION / DATA DISPLAY -->
+          <article data-type="navigation" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Data Control</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Variant 1 -->
+                <div class="variant-item" data-variant="Blocky Folder Tabs">
+                    <div class="preview-area">
+                        <div class="flex items-end gap-1">
+                            <div class="px-6 py-3 bg-bg border-x border-t border-border text-[10px] font-black uppercase text-primary -mb-px relative z-10">Explorer</div>
+                            <div class="px-6 py-3 bg-zinc-900 border-x border-t border-border text-[10px] font-black uppercase text-zinc-600 hover:text-zinc-400 transition-colors">Terminal</div>
+                        </div>
+                        <div class="h-32 bg-bg border border-border p-8 flex items-center justify-center">
+                             <span class="text-[10px] font-black text-zinc-700 tracking-[1em] uppercase">Active Pane</span>
+                        </div>
+                    </div>
+                    <button class="show-code-btn text-[8px] font-black text-zinc-600 uppercase mt-2 hover:text-primary transition-colors">View Source Architecture</button>
+                </div>
+
+                <!-- Variant 2 -->
+                <div class="variant-item" data-variant="Minimal Grid Select">
+                    <div class="preview-area grid grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
+                        <button class="p-8 bg-primary text-zinc-950 text-xs font-black uppercase">Core</button>
+                        <button class="p-8 bg-bg text-zinc-600 text-xs font-black uppercase border-l border-border hover:bg-zinc-900 transition-colors">Aux</button>
+                        <button class="p-8 bg-bg text-zinc-600 text-xs font-black uppercase border-l border-border hover:bg-zinc-900 transition-colors">Logic</button>
+                        <button class="p-8 bg-bg text-zinc-600 text-xs font-black uppercase border-l border-border hover:bg-zinc-900 transition-colors">Vault</button>
+                    </div>
+                    <button class="show-code-btn text-[8px] font-black text-zinc-600 uppercase mt-2 hover:text-primary transition-colors">SOURCE</button>
+                </div>
+
+                <!-- Variant 3 -->
+                <div class="variant-item" data-variant="Vertical Control Stack">
+                    <div class="preview-area flex flex-col border border-border divide-y divide-border">
+                        <div class="p-6 bg-bg flex items-center justify-between hover:bg-zinc-900 transition-colors cursor-pointer group">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-primary">01: SYSTEM_INIT</span>
+                            <i class="bi bi-chevron-right text-zinc-700 group-hover:text-primary transition-colors"></i>
+                        </div>
+                        <div class="p-6 bg-bg flex items-center justify-between hover:bg-zinc-900 transition-colors cursor-pointer group">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">02: DATA_SYPHON</span>
+                            <i class="bi bi-chevron-right text-zinc-700 group-hover:text-primary transition-colors"></i>
+                        </div>
+                        <div class="p-6 bg-bg flex items-center justify-between hover:bg-zinc-900 transition-colors cursor-pointer group">
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">03: CORE_DUMP</span>
+                            <i class="bi bi-chevron-right text-zinc-700 group-hover:text-primary transition-colors"></i>
+                        </div>
+                    </div>
+                    <button class="show-code-btn text-[8px] font-black text-zinc-600 uppercase mt-2 hover:text-primary transition-colors">SOURCE</button>
+                </div>
+            </div>
+          </article>
+          <!-- AUTH FORMS -->
+          <article data-type="auth" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Authentication</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1: Blocky Login -->
+                <div class="variant-item" data-variant="Blocky Logic Login">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 CORE_LOGIN</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-12 lg:p-24 bg-bg border border-border flex justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 grid-lines opacity-10"></div>
+                        <div class="relative z-10 w-full max-w-sm border border-border bg-zinc-950 p-8 shadow-2xl">
+                            <div class="text-center mb-8">
+                                <div class="w-12 h-12 bg-primary flex items-center justify-center font-black text-zinc-950 mx-auto mb-4">A</div>
+                                <h3 class="text-2xl font-black font-outfit uppercase tracking-tighter">Identity_Check</h3>
+                                <p class="text-xs font-bold text-zinc-500 mt-2">Enter credentials to access Nexus.</p>
+                            </div>
+                            <form class="space-y-4">
+                                <div>
+                                    <label class="block text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2">Node ID (Email)</label>
+                                    <input type="email" class="w-full bg-bg border border-border p-4 text-xs font-bold text-white placeholder-zinc-700 outline-none focus:border-primary transition-all" placeholder="operator@alloy.com">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-2">Access Key (Password)</label>
+                                    <input type="password" class="w-full bg-bg border border-border p-4 text-xs font-bold text-white placeholder-zinc-700 outline-none focus:border-primary transition-all" placeholder="••••••••">
+                                </div>
+                                <div class="flex items-center justify-between mt-2 mb-8">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-4 h-4 border border-zinc-700 peer-checked:bg-primary peer-checked:border-primary transition-all relative">
+                                            <i class="bi bi-check text-bg text-[10px] absolute inset-0 flex items-center justify-center opacity-0 peer-checked:opacity-100"></i>
+                                        </div>
+                                        <span class="text-[10px] font-bold text-zinc-500 uppercase">Keep Line Open</span>
+                                    </label>
+                                    <a href="#" class="text-[10px] font-bold text-primary uppercase underline hover:text-white transition-all">Lost Key?</a>
+                                </div>
+                                <button type="submit" class="w-full py-4 bg-primary text-zinc-950 font-black text-xs uppercase tracking-widest hover:bg-white transition-all">Initialize Sequence</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2: Minimal Split Auth -->
+                <div class="variant-item" data-variant="Split Visual Auth">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 SPLIT_IDENT</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area border border-border bg-bg min-h-[500px] flex overflow-hidden">
+                        <div class="hidden lg:flex flex-1 border-r border-border bg-zinc-900 p-12 flex-col justify-between relative">
+                            <div class="absolute inset-0 grid-lines opacity-10"></div>
+                            <div class="relative z-10">
+                                <span class="text-[10px] font-black tracking-widest text-primary border border-primary px-3 py-1">SYSTEM_AUTH</span>
+                                <h3 class="text-4xl font-black font-outfit uppercase mt-8 text-white leading-none">Access <br>Restricted <br>Area.</h3>
+                            </div>
+                            <div class="relative z-10">
+                                <p class="text-sm font-bold text-zinc-500 border-l border-primary pl-4 max-w-xs">"Security protocols dictate a full structural scan before node entry."</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 p-12 lg:p-24 flex items-center justify-center">
+                            <div class="w-full max-w-sm">
+                                <h4 class="text-xl font-black font-outfit uppercase mb-8">Establish Link</h4>
+                                <div class="space-y-4 mb-8">
+                                    <button class="w-full py-3 border border-border flex items-center justify-center gap-3 text-xs font-bold uppercase hover:bg-zinc-900 transition-all text-zinc-300">
+                                        <i class="bi bi-github"></i> Github Protocol
+                                    </button>
+                                    <button class="w-full py-3 border border-border flex items-center justify-center gap-3 text-xs font-bold uppercase hover:bg-zinc-900 transition-all text-zinc-300">
+                                        <i class="bi bi-google"></i> Google Identity
+                                    </button>
+                                </div>
+                                <div class="flex items-center gap-4 mb-8">
+                                    <div class="h-px flex-1 bg-border"></div>
+                                    <span class="text-[10px] font-black text-zinc-600 uppercase">Or internal</span>
+                                    <div class="h-px flex-1 bg-border"></div>
+                                </div>
+                                <form class="space-y-4">
+                                    <input type="email" class="w-full bg-transparent border-b border-border py-3 text-xs font-bold text-white placeholder-zinc-600 outline-none focus:border-primary transition-all rounded-none" placeholder="Email Address">
+                                    <button type="submit" class="w-full py-4 bg-zinc-800 text-white font-black text-xs uppercase tracking-widest hover:bg-primary transition-all">Continue</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+
+          <!-- CONTACT FORMS -->
+          <article data-type="contact" class="component-block">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="h-px flex-1 bg-border"></div>
+                <h3 class="text-xs font-black tracking-[0.5em] text-zinc-500 uppercase">Comms & Contact</h3>
+                <div class="h-px flex-1 bg-border"></div>
+            </div>
+
+            <div class="space-y-24">
+                <!-- Variant 1: Terminal Support Form -->
+                <div class="variant-item" data-variant="Terminal Logic Form">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">01 TERMINAL_COMMS</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area p-8 lg:p-16 border border-border bg-bg">
+                        <div class="max-w-2xl mx-auto border border-border bg-zinc-950 pixel-border p-2">
+                             <div class="bg-zinc-900 px-4 py-2 border-b border-border flex justify-between items-center mb-6">
+                                 <span class="text-[10px] font-black text-zinc-500 tracking-widest uppercase">Direct Transmission // Port 3000</span>
+                                 <div class="flex gap-2">
+                                     <div class="w-2 h-2 bg-border"></div>
+                                     <div class="w-2 h-2 bg-primary"></div>
+                                 </div>
+                             </div>
+                             <form class="p-6 space-y-6 form-mono">
+                                 <div class="grid md:grid-cols-2 gap-6">
+                                     <div>
+                                         <label class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 font-mono">> Operator_Name</label>
+                                         <input type="text" class="w-full bg-zinc-900 border border-zinc-800 p-3 text-xs text-primary font-mono outline-none focus:border-primary" placeholder="_">
+                                     </div>
+                                     <div>
+                                         <label class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 font-mono">> Return_Address</label>
+                                         <input type="email" class="w-full bg-zinc-900 border border-zinc-800 p-3 text-xs text-primary font-mono outline-none focus:border-primary" placeholder="_">
+                                     </div>
+                                 </div>
+                                 <div>
+                                     <label class="block text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 font-mono">> Transmission_Body</label>
+                                     <textarea rows="5" class="w-full bg-zinc-900 border border-zinc-800 p-3 text-xs text-primary font-mono outline-none focus:border-primary resize-none" placeholder="Enter logic structure here..."></textarea>
+                                 </div>
+                                 <button type="submit" class="w-full py-4 bg-primary text-zinc-950 font-black text-xs uppercase tracking-widest font-mono hover:bg-white transition-all">> EXECUTE_SEND</button>
+                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant 2: Structured Contact Data -->
+                <div class="variant-item" data-variant="Structured Data Portal">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">02 DATA_PORTAL</p>
+                        <button class="show-code-btn text-[10px] font-black text-primary border border-primary px-3 py-1">SOURCE</button>
+                    </div>
+                    <div class="preview-area grid md:grid-cols-5 border border-border bg-bg">
+                         <div class="md:col-span-2 border-b md:border-b-0 md:border-r border-border p-12 bg-zinc-900/50">
+                             <h4 class="text-3xl font-black font-outfit uppercase tracking-tighter mb-4">Support <br>Hub.</h4>
+                             <p class="text-zinc-500 text-xs font-bold leading-relaxed mb-12">Submit technical anomalies or logic requests to the core team.</p>
+                             <div class="space-y-6">
+                                 <div>
+                                     <div class="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-1">Global HQ</div>
+                                     <div class="text-sm font-bold text-zinc-300">Sector 4, Alloy District<br>Neo-City, 90210</div>
+                                 </div>
+                                 <div>
+                                     <div class="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-1">Direct Line</div>
+                                     <div class="text-sm font-bold text-primary">ping@alloy.system</div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="md:col-span-3 p-12">
+                             <form class="space-y-8">
+                                 <div class="grid grid-cols-2 gap-8">
+                                     <div class="border-b border-border pb-2 group">
+                                         <input type="text" class="w-full bg-transparent text-sm font-bold text-white placeholder-zinc-700 outline-none group-focus-within:text-primary transition-all rounded-none" placeholder="First Designation">
+                                     </div>
+                                     <div class="border-b border-border pb-2 group">
+                                         <input type="text" class="w-full bg-transparent text-sm font-bold text-white placeholder-zinc-700 outline-none group-focus-within:text-primary transition-all rounded-none" placeholder="Last Designation">
+                                     </div>
+                                 </div>
+                                 <div class="border-b border-border pb-2 group">
+                                     <input type="email" class="w-full bg-transparent text-sm font-bold text-white placeholder-zinc-700 outline-none group-focus-within:text-primary transition-all rounded-none" placeholder="Terminal Address">
+                                 </div>
+                                 <div class="border-b border-border pb-2 group">
+                                     <select class="w-full bg-transparent text-sm font-bold text-zinc-700 outline-none group-focus-within:text-primary transition-all appearance-none cursor-pointer">
+                                         <option value="" disabled selected>Select Query Type // --</option>
+                                         <option value="bug">Logic Anomaly (Bug)</option>
+                                         <option value="feat">System Upgrade (Feature)</option>
+                                         <option value="other">Other Transmission</option>
+                                     </select>
+                                 </div>
+                                 <div class="border-b border-border pb-2 group">
+                                     <textarea rows="3" class="w-full bg-transparent text-sm font-bold text-white placeholder-zinc-700 outline-none group-focus-within:text-primary transition-all resize-none rounded-none" placeholder="Transmission Details..."></textarea>
+                                 </div>
+                                 <div class="flex justify-end">
+                                     <button type="submit" class="px-8 py-4 border border-zinc-700 text-zinc-400 font-black text-xs uppercase tracking-widest hover:border-primary hover:text-primary transition-all">Submit Entry</button>
+                                 </div>
+                             </form>
+                         </div>
+                    </div>
+                </div>
+            </div>
+          </article>
+        </section>
+
+
+        <p id="emptyState" class="hidden py-40 text-center text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em]">
+           No foundations detected for this query.
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <div id="codeModal" class="hidden fixed inset-0 z-[100] bg-zinc-950/90 backdrop-blur-xl flex items-center justify-center p-6">
+     <div class="bg-bg w-full max-w-4xl border border-border pixel-border overflow-hidden">
+        <div class="px-8 py-6 border-b border-border flex items-center justify-between">
+           <h3 class="font-black font-outfit tracking-tighter uppercase">SOURCE IMPLEMENTATION</h3>
+           <button onclick="closeModal()" class="text-zinc-500 hover:text-white"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="p-0 border-b border-border">
+           <pre class="bg-zinc-950 p-8 overflow-auto text-sm font-mono scrollbar-hide max-h-[60vh]"><code id="modalCode" class="block whitespace-pre"></code></pre>
+        </div>
+        <div class="px-8 py-6 border-t border-border flex justify-end">
+            <button onclick="copyModalCode()" id="modalCopyBtn" class="bg-primary text-zinc-950 px-8 py-3 font-black text-sm hover:scale-105 transition-all">COPY TO CLIPBOARD</button>
+        </div>
+     </div>
+  </div>
+
+  <script>
+    (function () {
+      const searchInput = document.getElementById('componentSearch');
+      const componentBlocks = Array.from(document.querySelectorAll('.component-block'));
+      const typeButtons = Array.from(document.querySelectorAll('.type-filter-btn'));
+      const summary = document.getElementById('resultsSummary');
+      const emptyState = document.getElementById('emptyState');
+      const html = document.documentElement;
+      const codeModal = document.getElementById('codeModal');
+      const modalCode = document.getElementById('modalCode');
+      const modalCopyBtn = document.getElementById('modalCopyBtn');
+      // Dark mode is default and only mode
+      document.documentElement.classList.add('dark');
+
+      window.closeModal = () => codeModal.classList.add('hidden');
+      window.copyModalCode = async () => {
+         await navigator.clipboard.writeText(modalCode.textContent);
+         modalCopyBtn.textContent = 'COPIED';
+         modalCopyBtn.classList.replace('bg-primary', 'bg-emerald-500');
+         setTimeout(() => {
+            modalCopyBtn.textContent = 'COPY TO CLIPBOARD';
+            modalCopyBtn.classList.replace('bg-emerald-500', 'bg-primary');
+         }, 1500);
+      };
+
+      function setActiveType(type) {
+        activeType = type;
+        typeButtons.forEach((btn) => {
+          const isActive = btn.dataset.type === type;
+          btn.classList.toggle('bg-primary', isActive);
+          btn.classList.toggle('text-zinc-950', isActive);
+          btn.classList.toggle('text-white', !isActive && html.classList.contains('dark'));
+          btn.classList.toggle('text-zinc-900', !isActive && html.classList.contains('light'));
+          btn.classList.toggle('border-primary', isActive);
+        });
+      }
+
+      function updateTypeCounts() {
+        const counts = { all: 0 };
+        document.querySelectorAll('.variant-item').forEach(v => {
+           counts.all++;
+           const block = v.closest('.component-block');
+           if(block) {
+               const type = block.dataset.type;
+               counts[type] = (counts[type] || 0) + 1;
+           }
+        });
+        
+        typeButtons.forEach((btn) => {
+          const badge = btn.querySelector('[data-count]');
+          if (badge) badge.textContent = counts[btn.dataset.type] || 0;
+        });
+      }
+
+      function applyFilters() {
+        const term = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        componentBlocks.forEach((block) => {
+          const blockType = block.dataset.type.toLowerCase();
+          const variants = Array.from(block.querySelectorAll('.variant-item'));
+          const matchesType = activeType === 'all' || blockType === activeType;
+          
+          let blockHasMatch = false;
+          variants.forEach((variant) => {
+            const variantName = (variant.dataset.variant || '').toLowerCase();
+            const variantKeywords = (variant.dataset.keywords || '').toLowerCase();
+            const matchTerm = !term || variantName.includes(term) || variantKeywords.includes(term);
+            
+            const isVisible = matchesType && matchTerm;
+            variant.classList.toggle('hidden', !isVisible);
+            if (isVisible) {
+               blockHasMatch = true;
+               visibleCount++;
+            }
+          });
+          
+          block.classList.toggle('hidden', !blockHasMatch);
+        });
+
+        emptyState.classList.toggle('hidden', visibleCount !== 0);
+        summary.textContent = `showing ${visibleCount} foundations`;
+      }
+
+      document.querySelectorAll('.copy-code-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const container = btn.closest('.variant-item');
+          const code = container.querySelector('code').textContent;
+          await navigator.clipboard.writeText(code);
+          const originalText = btn.textContent;
+          if(originalText === 'COPY') {
+            btn.textContent = 'OK';
+            setTimeout(() => btn.textContent = 'COPY', 2000);
+          } else {
+              btn.innerHTML = '<i class="bi bi-check2 text-emerald-500"></i>';
+              setTimeout(() => btn.innerHTML = '<i class="bi bi-clipboard"></i>', 2000);
+          }
+        });
+      });
+
+      document.querySelectorAll('.show-code-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const container = btn.closest('.variant-item');
+          const previewContainer = container.querySelector('.preview-area') || container.querySelector('div:not(.flex)');
+          
+          let code = '';
+          if (previewContainer) {
+              const temp = document.createElement('div');
+              temp.innerHTML = previewContainer.innerHTML;
+              
+              // 1. CLEANING
+              let raw = temp.innerHTML
+                  .replace(/ class=""/g, '')
+                  .replace(/ data-v-[a-z0-9]+=""/g, '') // remove framework artifacts
+                  .trim();
+
+              // 2. FORMATTING
+              let formatted = '';
+              let indent = 0;
+              const nodes = raw.split(/>\s*</);
+              
+              nodes.forEach((node, i) => {
+                  if (node.match(/^\/\w/)) indent--;
+                  formatted += '  '.repeat(Math.max(0, indent)) + '<' + node + '>\n';
+                  if (node.match(/^<?\w[^>]*[^\/]$/) && !node.startsWith('input') && !node.startsWith('img') && !node.startsWith('br') && !node.startsWith('hr')) indent++;
+              });
+              
+              code = formatted.trim()
+                .replace(/<</g, '<')
+                .replace(/>>/g, '>')
+                .replace(/<([^>]+)><\/\1>/g, '<$1></$1>'); // collapse empty tags
+
+              // 3. SYNTAX HIGHLIGHTING (Simple Regex)
+              const highlighted = code
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/(&lt;\/?[a-z0-9]+)(.*?)(\/?&gt;)/gi, (match, p1, p2, p3) => {
+                    const tag = p1.replace(/(&lt;\/?)([a-z0-9]+)/i, '$1<span class="text-primary">$2</span>');
+                    const attrs = p2.replace(/([a-z-]+)="([^"]*)"/gi, ' <span class="text-emerald-500">$1</span>=<span class="text-amber-500">"$2"</span>');
+                    return tag + attrs + p3;
+                });
+              
+              modalCode.innerHTML = highlighted || '// Source logic not detected';
+          } else {
+              modalCode.textContent = '// Source logic not detected';
+          }
+          
+          codeModal.classList.remove('hidden');
+        });
+      });
+
+      typeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          setActiveType(btn.dataset.type);
+          applyFilters();
+        });
+      });
+
+      searchInput.addEventListener('input', applyFilters);
+      updateTypeCounts();
+      setActiveType('all');
+      applyFilters();
+    })();
+  </script>
+</body>
+</html>
